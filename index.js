@@ -25,3 +25,44 @@ mongoose
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+const newRecipe = {
+  title: "Avocado Toast",
+  level: "Easy Peasy",
+  ingredients: ["One ripe avocado", "salt", "pepper", "one slice of whole grain bread", "olive oil" , "lemon", "cilantro", "tomato", "onion"],
+  cuisine: "Vegan",
+  dishType: "breakfast",
+  image: "https://gimmedelicious.com/wp-content/uploads/2016/07/avocado-toast-7-of-13.jpg",
+  duration: 10,
+  creator: "Avocado Kingdom",
+}
+
+Recipe.create(newRecipe)
+.then(newRecipe => console.log('Recipe ' + newRecipe.title + ' created'))
+.catch(error => console.log('Recipe not inserted!!'))
+
+
+Recipe.insertMany(data)
+.then(recipes => 
+  recipes.forEach(element => {
+      console.log(element.title);
+    })
+).catch(error => console.log("data not inserted!!"))
+
+
+const RigatoniChange = Recipe.findOneAndUpdate({title:"Rigatoni alla Genovese"},{duration:100})
+.then (console.log ("Duration of Rigatoni alla Genovese updated"))
+.catch (error => console.log("Rigatoni not updated"));
+
+
+const CarrotCakeChange = Recipe.deleteOne({title: "Carrot Cake"})
+.then (console.log("Carrot Cake successfully removed"))
+.catch(error => console.log("Carrot Cake lives another day!"));
+
+
+Promise.all([RigatoniChange,CarrotCakeChange])
+.then (() => {
+  mongoose.connection.close();
+})
+  .catch (error => console.log("I'm still here!"));
+  
