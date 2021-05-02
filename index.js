@@ -40,13 +40,14 @@ const newRecipe = {
 Recipe.create(newRecipe)
 .then(newRecipe => console.log('Recipe ' + newRecipe.title + ' created'))
 .catch(error => console.log('Recipe not inserted!!'))
-
+//did not know how to add the save() method here!
 
 Recipe.insertMany(data)
 .then(recipes => 
   recipes.forEach(element => {
       console.log(element.title);
     })
+    //did not know how to add the save() method here!
 ).catch(error => console.log("data not inserted!!"))
 
 
